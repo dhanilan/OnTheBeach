@@ -49,9 +49,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EndToEndTests\UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="JobParser_Tests.cs" />
-    <Compile Include="JobTreeTests.cs" />
+    <Compile Include="UnitTests\JobParser_Tests.cs" />
+    <Compile Include="UnitTests\JobTreeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

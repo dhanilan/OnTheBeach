@@ -25,7 +25,7 @@ namespace JobSequencing
         public void Add(Job job)
         {
             Validate(job);
-            AddToTree(job.JobId, job.ParentJobId);
+            AddToTree(job.JobId, job.DependantJobId);
         }
 
 
@@ -61,7 +61,7 @@ namespace JobSequencing
             if (string.IsNullOrEmpty(job.JobId))
                 throw new ArgumentNullException("JobId");
 
-            if (string.Equals(job.JobId, job.ParentJobId))
+            if (string.Equals(job.JobId, job.DependantJobId))
                 throw new ArgumentException("Parent and Job cannot be same");
 
             if (CheckCircularReference(job))
@@ -72,31 +72,31 @@ namespace JobSequencing
         private bool CheckCircularReference(Job job)
         {
             var jobToAdd = Find(Root, job.JobId);
-            if (jobToAdd != null && job.ParentJobId != null)
+            if (jobToAdd != null && job.DependantJobId != null)
             {
-                var existingJobChildOfParent = Find(jobToAdd, job.ParentJobId);
+                var existingJobChildOfParent = Find(jobToAdd, job.DependantJobId);
                 return existingJobChildOfParent != null;
             }
 
             return false;
         }
 
-        private JobNode AddToTree(string jobId, string parentJobId = null)
+        private JobNode AddToTree(string jobId, string dependantJobId = null)
         {
             var alreadyInTree = Find(Root, jobId);
             var isAlreadyInTree = alreadyInTree != null;
 
             var nodeToAppendJob = Root;
-            if (parentJobId != null)
+            if (dependantJobId != null)
             {
-                var parentJob = Find(Root, parentJobId);
-                if (parentJob != null)
+                var dependantJob = Find(Root, dependantJobId);
+                if (dependantJob != null)
                 {
-                    nodeToAppendJob = parentJob;
+                    nodeToAppendJob = dependantJob;
                 }
                 else
                 {
-                    nodeToAppendJob = AddToTree(parentJobId);
+                    nodeToAppendJob = AddToTree(dependantJobId);
                 }
             }
 
@@ -107,28 +107,24 @@ namespace JobSequencing
 
             var jobToRelate = isAlreadyInTree ? alreadyInTree : new JobNode(jobId);
 
-            if (nodeToAppendJob.ChildJobs == null)
-                nodeToAppendJob.ChildJobs = new List<JobNode>();
+            if (nodeToAppendJob.DependantJobs == null)
+                nodeToAppendJob.DependantJobs = new List<JobNode>();
 
-            nodeToAppendJob.ChildJobs.Add(jobToRelate);
+            nodeToAppendJob.DependantJobs.Add(jobToRelate);
             return jobToRelate;
-
-
-
-
         }
 
         private void DettatchFromParent(string jobId,JobNode alreadyPresent)
         {
             var parent = FindParent(Root,jobId);
-            parent.ChildJobs.Remove(alreadyPresent);
+            parent.DependantJobs.Remove(alreadyPresent);
         }
 
         private JobNode FindParent(JobNode node, string jobId)
         {
-            if (node.ChildJobs == null)
+            if (node.DependantJobs == null)
                 return null;
-            foreach (var child in node.ChildJobs)
+            foreach (var child in node.DependantJobs)
             {
                 if (child.JobId == jobId)
                     return node;
@@ -149,9 +145,9 @@ namespace JobSequencing
             if (node.JobId == jobId)
                 return node;
 
-            if (node.ChildJobs != null)
+            if (node.DependantJobs != null)
             {
-                foreach (var child in node.ChildJobs)
+                foreach (var child in node.DependantJobs)
                 {
                     var findResult = Find(child, jobId);
                     if (findResult != null)
@@ -170,9 +166,9 @@ namespace JobSequencing
             if (node.JobId != ROOT_JOB_IDENTIFIER)
                 result.Add(node.JobId);
 
-            if (node.ChildJobs != null)
+            if (node.DependantJobs != null)
             {
-                foreach (var childJob in node.ChildJobs)
+                foreach (var childJob in node.DependantJobs)
                 {
                     result.AddRange(BreadthFirstTraversal(childJob));
                 }

@@ -27,7 +27,7 @@ namespace JobSequencing
             var result = new Job(args[0]);
 
             if (args.Length == 3)
-                result.ParentJobId = args[2];
+                result.DependantJobId = args[2];
 
             return result;
         }

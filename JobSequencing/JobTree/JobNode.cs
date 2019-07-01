@@ -15,7 +15,7 @@ namespace JobSequencing
         /// <summary>
         /// Child/Dependent Jobs
         /// </summary>
-        public List<JobNode> ChildJobs { get; set; }
+        public List<JobNode> DependantJobs { get; set; }
 
 
         /// <summary>

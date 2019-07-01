@@ -14,7 +14,7 @@
         /// <summary>
         /// Identifier of parent Job
         /// </summary>
-        public string ParentJobId { get; set; }
+        public string DependantJobId { get; set; }
 
         /// <summary>
         /// Constructor

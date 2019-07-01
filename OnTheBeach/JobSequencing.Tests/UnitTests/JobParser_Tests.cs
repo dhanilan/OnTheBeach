@@ -12,7 +12,7 @@ namespace JobSequencing.Tests
             IJobParser parser = new JobParser();
             var result = parser.Parse("A => B");
             Assert.AreEqual(result.JobId,"A");
-            Assert.AreEqual(result.ParentJobId,"B");
+            Assert.AreEqual(result.DependantJobId,"B");
         }
 
 
@@ -22,7 +22,7 @@ namespace JobSequencing.Tests
             IJobParser parser = new JobParser();
             var result = parser.Parse("A =>");
             Assert.AreEqual(result.JobId, "A");
-            Assert.IsNull(result.ParentJobId);
+            Assert.IsNull(result.DependantJobId);
         }
 
         [TestMethod]

@@ -33,7 +33,7 @@ namespace JobSequencing.Tests
         {
             IJobTree jobTree = new JobTree();
             var job = new Job("A");
-            job.ParentJobId = "A";
+            job.DependantJobId = "A";
             jobTree.Add(job);
         }        
 
@@ -43,7 +43,7 @@ namespace JobSequencing.Tests
             IJobTree jobTree = new JobTree();
             jobTree.Add(new Job("A"));
             jobTree.Add(new Job("B"));
-            jobTree.Add(new Job("C") { ParentJobId = "B"});
+            jobTree.Add(new Job("C") { DependantJobId = "B"});
 
             var jobs = jobTree.GetJobs();
             Assert.IsTrue(jobs.Contains("A"));
@@ -58,8 +58,8 @@ namespace JobSequencing.Tests
             IJobTree jobTree = new JobTree();
             jobTree.Add(new Job("A"));
             jobTree.Add(new Job("B"));
-            jobTree.Add(new Job("C") { ParentJobId = "B" });
-            jobTree.Add(new Job("D") { ParentJobId = "C" });
+            jobTree.Add(new Job("C") { DependantJobId = "B" });
+            jobTree.Add(new Job("D") { DependantJobId = "C" });
 
             var jobs = jobTree.GetJobs();
             Assert.IsTrue(jobs.Contains("A"));
@@ -77,11 +77,11 @@ namespace JobSequencing.Tests
             jobTree.Add(new Job("A"));
 
             jobTree.Add(new Job("B"));
-            jobTree.Add(new Job("C") { ParentJobId = "B" });
-            jobTree.Add(new Job("D") { ParentJobId = "C" });
+            jobTree.Add(new Job("C") { DependantJobId = "B" });
+            jobTree.Add(new Job("D") { DependantJobId = "C" });
 
-            jobTree.Add(new Job("E") { ParentJobId = "A" });
-            jobTree.Add(new Job("F") { ParentJobId = "E" });
+            jobTree.Add(new Job("E") { DependantJobId = "A" });
+            jobTree.Add(new Job("F") { DependantJobId = "E" });
 
             var jobs = jobTree.GetJobs();
             Assert.IsTrue(jobs.Contains("A"));
@@ -100,9 +100,9 @@ namespace JobSequencing.Tests
         {
             IJobTree jobTree = new JobTree();
             //jobTree.Add(new Job("B"));
-            jobTree.Add(new Job("B") { ParentJobId = "C" });
-            jobTree.Add(new Job("C") { ParentJobId = "F" });
-            jobTree.Add(new Job("F") { ParentJobId = "B" });
+            jobTree.Add(new Job("B") { DependantJobId = "C" });
+            jobTree.Add(new Job("C") { DependantJobId = "F" });
+            jobTree.Add(new Job("F") { DependantJobId = "B" });
 
 
         }

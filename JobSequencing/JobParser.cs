@@ -2,17 +2,25 @@
 
 namespace JobSequencing
 {
+    /// <summary>
+    /// Parser class which parses Job from input string
+    /// </summary>
     public class JobParser : IJobParser
     {
+        /// <summary>
+        /// Parses the Job from input
+        /// </summary>
+        /// <param name="input">input string</param>
+        /// <returns>Job instance</returns>
         public Job Parse(string input)
         {
-            string[] args = input.Split(' ');
+            string[] args = input.Split(Constants.JobSeperator);
 
             if (!(args.Length == 2 || args.Length == 3))
-                throw new ArgumentException("Input string in incorrect format");
+                throw new ArgumentException(Constants.IncorrectFormatMessage);
 
-            if (args[1] != "=>")
-                throw new ArgumentException("implies operator expected");
+            if (args[1] != Constants.JobDependencyOperator)
+                throw new ArgumentException(Constants.ImpliesOperatorExpectedMessage);
 
             var result = new Job(args[0]);
 

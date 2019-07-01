@@ -49,7 +49,7 @@ namespace JobSequencing.Tests
             Assert.IsTrue(jobs.Contains("A"));
             Assert.IsTrue(jobs.Contains("B"));
             Assert.IsTrue(jobs.Contains("C"));
-            Assert.IsTrue(jobs.IndexOf("C") < jobs.IndexOf("B"));
+            Assert.IsTrue(jobs.IndexOf("C") > jobs.IndexOf("B"));
         }
 
         [TestMethod]
@@ -65,8 +65,8 @@ namespace JobSequencing.Tests
             Assert.IsTrue(jobs.Contains("A"));
             Assert.IsTrue(jobs.Contains("B"));
             Assert.IsTrue(jobs.Contains("C"));
-            Assert.IsTrue(jobs.IndexOf("C") < jobs.IndexOf("B"));
-            Assert.IsTrue(jobs.IndexOf("D") < jobs.IndexOf("C"));
+            Assert.IsTrue(jobs.IndexOf("C") > jobs.IndexOf("B"));
+            Assert.IsTrue(jobs.IndexOf("D") > jobs.IndexOf("C"));
         }
 
         [TestMethod]
@@ -87,11 +87,11 @@ namespace JobSequencing.Tests
             Assert.IsTrue(jobs.Contains("A"));
             Assert.IsTrue(jobs.Contains("B"));
             Assert.IsTrue(jobs.Contains("C"));
-            Assert.IsTrue(jobs.IndexOf("C") < jobs.IndexOf("B"));
-            Assert.IsTrue(jobs.IndexOf("D") < jobs.IndexOf("C"));
+            Assert.IsTrue(jobs.IndexOf("C") > jobs.IndexOf("B"));
+            Assert.IsTrue(jobs.IndexOf("D") > jobs.IndexOf("C"));
 
-            Assert.IsTrue(jobs.IndexOf("E") < jobs.IndexOf("A"));
-            Assert.IsTrue(jobs.IndexOf("F") < jobs.IndexOf("E"));
+            Assert.IsTrue(jobs.IndexOf("E") > jobs.IndexOf("A"));
+            Assert.IsTrue(jobs.IndexOf("F") > jobs.IndexOf("E"));
         }
 
         [TestMethod]

@@ -6,7 +6,7 @@ namespace JobSequencing.Parser
 {
     public class ParserFactory
     {
-        static IJobParser Create()
+        public static IJobParser Create()
         {
             return new JobParser();
 

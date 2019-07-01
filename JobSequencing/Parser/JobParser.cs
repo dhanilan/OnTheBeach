@@ -14,6 +14,8 @@ namespace JobSequencing
         /// <returns>Job instance</returns>
         public Job Parse(string input)
         {
+            input = input.Replace('\r', ' ');
+            input = input.Trim();
             string[] args = input.Split(Constants.JobSeperator);
 
             if (!(args.Length == 2 || args.Length == 3))

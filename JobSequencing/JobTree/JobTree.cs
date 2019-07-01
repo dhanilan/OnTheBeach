@@ -36,7 +36,7 @@ namespace JobSequencing
         /// <returns></returns>
         public List<string> GetJobs()
         {
-            return DepthFirstTraversal(Root);
+            return BreadthFirstTraversal(Root);
         }
 
         #endregion
@@ -125,13 +125,19 @@ namespace JobSequencing
         }
 
         private JobNode FindParent(JobNode node, string jobId)
-        {            
+        {
+            if (node.ChildJobs == null)
+                return null;
             foreach (var child in node.ChildJobs)
             {
                 if (child.JobId == jobId)
                     return node;
                 else
-                 return FindParent(child, jobId);                
+                {
+                    var findNextLevel = FindParent(child, jobId);
+                    if (findNextLevel != null)
+                        return findNextLevel;
+                }
             }
 
             return null;
@@ -157,19 +163,23 @@ namespace JobSequencing
             return null;
         }
 
-        private List<string> DepthFirstTraversal(JobNode node)
+        private List<string> BreadthFirstTraversal(JobNode node)
         {
             var result = new List<string>();
+
+            if (node.JobId != ROOT_JOB_IDENTIFIER)
+                result.Add(node.JobId);
 
             if (node.ChildJobs != null)
             {
                 foreach (var childJob in node.ChildJobs)
                 {
-                    result.AddRange(DepthFirstTraversal(childJob));
+                    result.AddRange(BreadthFirstTraversal(childJob));
                 }
             }
 
-            result.Add(node.JobId);
+            
+
             return result;
         }
         #endregion

@@ -5,7 +5,7 @@ namespace JobSequencing
     /// <summary>
     /// A tree structure to save hierarychy of jobs
     /// </summary>
-    interface IJobTree
+    public interface IJobTree
     {
         /// <summary>
         /// Add Job to the tree

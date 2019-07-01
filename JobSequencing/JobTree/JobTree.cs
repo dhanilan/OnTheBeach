@@ -56,6 +56,10 @@ namespace JobSequencing
 
         #region Private methods
 
+        /// <summary>
+        /// Validations
+        /// </summary>
+        /// <param name="job"></param>
         private void Validate(Job job)
         {
             if (string.IsNullOrEmpty(job.JobId))
@@ -69,6 +73,11 @@ namespace JobSequencing
 
         }
 
+        /// <summary>
+        /// Check for circular references
+        /// </summary>
+        /// <param name="job"></param>
+        /// <returns></returns>
         private bool CheckCircularReference(Job job)
         {
             var jobToAdd = Find(Root, job.JobId);
@@ -81,6 +90,12 @@ namespace JobSequencing
             return false;
         }
 
+        /// <summary>
+        /// Adds the job to tree under the dependant job, if empty to root
+        /// </summary>
+        /// <param name="jobId">job id of job to append</param>
+        /// <param name="dependantJobId">job id on which the current Job is dependant </param>
+        /// <returns></returns>
         private JobNode AddToTree(string jobId, string dependantJobId = null)
         {
             var alreadyInTree = Find(Root, jobId);
@@ -114,12 +129,23 @@ namespace JobSequencing
             return jobToRelate;
         }
 
+        /// <summary>
+        /// Remove from existing node to add a parent to the node
+        /// </summary>
+        /// <param name="jobId"></param>
+        /// <param name="alreadyPresent"></param>
         private void DettatchFromParent(string jobId,JobNode alreadyPresent)
         {
             var parent = FindParent(Root,jobId);
             parent.DependantJobs.Remove(alreadyPresent);
         }
 
+        /// <summary>
+        /// Find parent of a given job id on node and its children
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="jobId"></param>
+        /// <returns></returns>
         private JobNode FindParent(JobNode node, string jobId)
         {
             if (node.DependantJobs == null)
@@ -140,6 +166,12 @@ namespace JobSequencing
            
         }
 
+        /// <summary>
+        /// Find a job in the tree
+        /// </summary>
+        /// <param name="node">node to start from</param>
+        /// <param name="jobId">job id</param>
+        /// <returns></returns>
         private JobNode Find(JobNode node, string jobId)
         {
             if (node.JobId == jobId)
@@ -159,6 +191,11 @@ namespace JobSequencing
             return null;
         }
 
+        /// <summary>
+        /// Breadth first traversal
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
         private List<string> BreadthFirstTraversal(JobNode node)
         {
             var result = new List<string>();

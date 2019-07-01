@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobSequencing\JobSequencing.csproj">
+      <Project>{3eda727e-452f-4135-848f-bcc81db85e66}</Project>
+      <Name>JobSequencing</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnTheBeach", "OnTheBeach.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobSequencing", "..\JobSequencing\JobSequencing.csproj", "{3EDA727E-452F-4135-848F-BCC81DB85E66}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobSequencing.Tests", "JobSequencing.Tests\JobSequencing.Tests.csproj", "{6A1F1B95-C570-479B-95E1-F0B328FF8B04}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3EDA727E-452F-4135-848F-BCC81DB85E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EDA727E-452F-4135-848F-BCC81DB85E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EDA727E-452F-4135-848F-BCC81DB85E66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A1F1B95-C570-479B-95E1-F0B328FF8B04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A1F1B95-C570-479B-95E1-F0B328FF8B04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A1F1B95-C570-479B-95E1-F0B328FF8B04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A1F1B95-C570-479B-95E1-F0B328FF8B04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
